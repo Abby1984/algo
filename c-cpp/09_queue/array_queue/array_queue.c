@@ -13,13 +13,17 @@
 
 array_queue * array_queue_create(int size)
 {
+	//队列结构体指针
 	array_queue * queue = NULL;
-
+	
+	//给队头开辟空间
 	queue = (array_queue*)malloc(sizeof(array_queue));
 	if (queue == NULL)
 	{
 		return NULL;
 	}
+	
+	//给队列数据区开辟空间
 	queue->array = (int *)malloc(sizeof(int)*size);
 	if (queue->array == NULL)
 	{
@@ -40,12 +44,14 @@ void array_queue_destory(array_queue *queue)
 	{
 		return;
 	}
-
+	
+	//释放数据区
 	if (queue->array != NULL)
 	{
 		free(queue->array);
 	}
-
+	
+	//释放队头
 	free(queue);
 	return;
 }
@@ -65,6 +71,7 @@ int array_queue_enqueue(array_queue *queue,int data)
 
 	return 0;
 }
+//出入队列的对头队尾的位置为什么要余队列容量？由于不会超过队列容量，取余与否结果不都是一样的吗？
 
 /*出队列*/
 int array_queue_dequeue(array_queue * queue,int *data)
@@ -81,6 +88,7 @@ int array_queue_dequeue(array_queue * queue,int *data)
     return 0;
 }
 
+//队列基本信息和数据打印
 void array_queue_dump(array_queue *queue)
 {
 	int i = 0;
